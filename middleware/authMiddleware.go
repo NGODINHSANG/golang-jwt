@@ -2,13 +2,14 @@ package middleware
 
 import (
 	"fmt"
-	helper "golang-jwt/helpers"
 	"net/http"
+
+	helper "github.com/NGODINHSANG/golang-jwt/helpers"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Authenticate() gin.HandlerFunc {
+func Authentication() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get the client token from the header
 		clientToken := c.Request.Header.Get("token")

@@ -3,10 +3,11 @@ package helpers
 import (
 	"context"
 	"fmt"
-	"golang-jwt/database"
 	"log"
 	"os"
 	"time"
+
+	"github.com/NGODINHSANG/golang-jwt/database"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/bson"

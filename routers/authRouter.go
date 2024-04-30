@@ -1,7 +1,7 @@
 package routers
 
 import (
-	controller "golang-jwt/controllers"
+	controller "github.com/NGODINHSANG/golang-jwt/controllers"
 
 	"github.com/gin-gonic/gin"
 )

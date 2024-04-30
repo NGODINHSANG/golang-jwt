@@ -3,13 +3,14 @@ package controllers
 import (
 	"context"
 	"fmt"
-	helper "golang-jwt/helpers"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
 
-	"golang-jwt/database"
+	helper "github.com/NGODINHSANG/golang-jwt/helpers"
+
+	"github.com/NGODINHSANG/golang-jwt/database"
 
 	"github.com/NGODINHSANG/golang-jwt/models"
 	"github.com/gin-gonic/gin"
@@ -18,8 +19,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
-
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // connect to database
@@ -71,8 +70,8 @@ func Login() gin.HandlerFunc {
 		if foundUser.Email == nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "user not found"})
 		}
-		token, refreshToken := helper.GenerateAllTokens(&foundUser.Email, &foundUser.First_name, &foundUser.Last_name, &foundUser.User_type, foundUser.User_id)
-		helper.UpdateAllToken(token, refreshToken, foundUser.User_id)
+		token, refreshToken, _ := helper.GenerateAllTokens(*foundUser.Email, *foundUser.First_name, *foundUser.Last_name, *foundUser.User_type, foundUser.User_id)
+		helper.UpdateAllTokens(token, refreshToken, foundUser.User_id)
 		userCollection.FindOne(ctx, bson.M{"email": foundUser.Email}).Decode(&foundUser)
 
 		if err != nil {
